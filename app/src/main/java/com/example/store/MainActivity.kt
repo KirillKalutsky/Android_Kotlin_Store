@@ -4,6 +4,8 @@ import Helper.PriceHelper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.store.Price.IPriceFormatter
+import com.example.store.Price.StorePriceFormatter
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,9 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         println("Округление цены")
-        println(PriceHelper.RoundPrice(100.1567));
-        println(PriceHelper.RoundPrice(2.564));
-        println(PriceHelper.RoundPrice(2.56));
-        println(PriceHelper.RoundPrice(2.565));
+        var priceFormatter:IPriceFormatter = StorePriceFormatter();
+        println(priceFormatter.Print(2.565));
     }
 }
