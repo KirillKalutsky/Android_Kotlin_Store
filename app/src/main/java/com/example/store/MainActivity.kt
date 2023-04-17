@@ -13,8 +13,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("Округление цены")
-        var priceFormatter:IPriceFormatter = StorePriceFormatter();
-        println(priceFormatter.Print(2.565));
+        println("Корзина")
+
+        var bananas = Product("Бананы", 100.0)
+        var backet = BaseBasket(mutableListOf(bananas))
+        println(backet.toString())
+        backet.AddProduct(Product("Яблоки", 85.0))
+        println(backet.toString())
+
+        println("Стоимость без скидки = ${backet.CountCost()}")
+        println("Стоимость со скидкой в 25% = ${backet.CountCost(25.0)}")
+
+        backet.RemoveProduct(bananas)
+        println(backet.toString())
     }
 }
