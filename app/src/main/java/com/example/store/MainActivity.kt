@@ -8,6 +8,7 @@ import android.text.Layout
 import android.util.Log
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import com.example.store.Price.IPriceFormatter
 import com.example.store.Price.StorePriceFormatter
 import kotlin.random.Random
@@ -44,6 +45,24 @@ class MainActivity : AppCompatActivity() {
         val editTextSurname = findViewById<EditText>(R.id.editTextSurname)
         val editTextLastName = findViewById<EditText>(R.id.editTextLastName)
         val buttonAccept = findViewById<Button>(R.id.buttonAccept)
+        buttonAccept.isEnabled = false
+        buttonAccept.isClickable = false
+
+        editTextPhone.addTextChangedListener {
+            if (editTextPhone.text.length == 11 && editTextPhone.text[0] == '8')
+            {
+                editTextPhone.error = null
+                buttonAccept.isEnabled = true
+                buttonAccept.isClickable = true
+            }
+            else
+            {
+                buttonAccept.isEnabled = false
+                buttonAccept.isClickable = false
+                editTextPhone.error = "Номер введён неправильно"
+            }
+        }
+
         buttonAccept.setOnClickListener {
             Toast.makeText(applicationContext,
                 "${editTextSurname.text} ${editTextName.text} ${editTextLastName.text}\nВаш телефон ${editTextPhone.text}",
