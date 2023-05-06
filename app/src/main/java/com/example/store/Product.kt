@@ -2,8 +2,18 @@ package com.example.store
 
 import java.util.*
 
-class Product(val Name:String, val Price:Double,
-              val UnicleIndicator:UUID = UUID.randomUUID()) {
+class Product(private val name:String,
+              private val price:Double,
+              private val unicleIndicator:UUID = UUID.randomUUID()) {
+
+    fun GetPrice(discountPercentage:Double = 0.0):Double{
+        return  price - discountPercentage * price / 100;
+    }
+
+    fun GetName():String = name;
+
+    fun GetId():UUID = unicleIndicator;
+
     override fun toString(): String =
-        "Продукт: ${Name}\nЦена: ${Price}"
+        "Продукт: ${name}\nЦена: ${price}"
 }

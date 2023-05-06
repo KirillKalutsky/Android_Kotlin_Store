@@ -1,26 +1,37 @@
 package com.example.store
 
-class BaseBasket(val Products:MutableList<Product> = mutableListOf()) {
+class BaseBasket(
+    private val products:MutableList<Product> = mutableListOf(),
+    private var discountPercentage:Double = 0.0) {
 
     fun AddProduct(product: Product){
-        Products.add(product)
+        products.add(product)
     }
 
-    fun CountCost(discountPercent:Double = 0.0):Double{
+    fun SetDiscount(newDiscount:Double){
+        if(newDiscount >= 0 && newDiscount <= 100)
+            discountPercentage = newDiscount;
+    }
+    fun GetProducts():MutableList<Product> =
+        products;
+
+    fun GetDiscount():Double = discountPercentage
+
+    fun CountCost():Double{
         var sum = 0.0;
 
-        for (product in Products)
-            sum+=product.Price;
+        for (product in products)
+            sum += product.GetPrice();
 
-        var discountPrice = sum*discountPercent/100;
+        var discountPrice = sum * discountPercentage / 100;
         return sum-discountPrice;
     }
 
     override fun toString(): String =
         "Корзина на сумму: ${CountCost()}\nТовары:\n" +
-                Products.map { product -> product.toString() }.joinToString(";\n");
+                products.map { product -> product.toString() }.joinToString(";\n");
 
     fun RemoveProduct(product: Product){
-        Products.removeIf { p -> p.UnicleIndicator == product.UnicleIndicator};
+        products.removeIf { p -> p.GetId() == product.GetId()};
     }
 }
