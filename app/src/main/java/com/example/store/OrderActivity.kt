@@ -1,23 +1,16 @@
 package com.example.store
 
-import Helper.PriceHelper
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
+import android.view.MenuItem
 import android.widget.*
-import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import com.example.store.Price.IPriceFormatter
-import com.example.store.Price.StorePriceFormatter
-import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
-
+class OrderActivity : ChildrenActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_main)
 
         println("Корзина")
